@@ -18,5 +18,5 @@
 	<main class="space-y-4 p-4">
 		{@render children()}
 	</main>
-	<footer class="bg-surface-800 p-4 text-surface-100">(footer)</footer>
+	<footer class="bg-surface-200 p-4 dark:bg-surface-800 dark:text-surface-100">(footer)</footer>
 </div>

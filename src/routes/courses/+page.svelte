@@ -9,7 +9,7 @@
 					name: 'Vim introduction',
 					description: 'Lorem ipsum dolor sir amet lorem ipsum dolor sit amet bla bla vblsad',
 					thumbnailUrl: 'https://placehold.co/400x200',
-					id: 0
+					id: 10
 				},
 				{
 					name: 'Vim introduction',
