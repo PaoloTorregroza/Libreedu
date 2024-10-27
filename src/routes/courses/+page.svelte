@@ -102,7 +102,7 @@
 							/>
 						</div>
 						<div class="p-4">
-							<h3>{course.name}</h3>
+							<h3 class="font-bold">{course.name}</h3>
 							<p class="font-light">{course.description}</p>
 						</div>
 					</a>

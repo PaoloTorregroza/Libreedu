@@ -10,3 +10,14 @@ export interface CoursePresentation {
 	description: string;
 	id: number;
 }
+
+export interface CourseContent {
+	completed: boolean;
+	name: string;
+	durationSeconds: number;
+}
+
+export interface CourseSection {
+	name: string;
+	lessons: CourseContent[];
+}
