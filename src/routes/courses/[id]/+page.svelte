@@ -1,12 +1,48 @@
 <script lang="ts">
 	import type { CourseSection } from '$lib/presentation_types';
 	import type { PageData } from './$types';
+	import Lesson from './block/Lesson.svelte';
 	import Progress from './components/Progress.svelte';
 
 	let data: PageData = $props();
 
 	let sidebarOpen = $state(true);
+
+	let lessonProperties = $state({
+		isYoutube: true,
+		name: 'Test Lesson',
+		description:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit cupiditate illum officiis quos suscipit asperiores exercitationem dolores possimus, eum nesciunt vel! Vero, provident culpa sunt ea nesciunt magni nihil odit.',
+		completed: false,
+		videoUrl: 'yUm-ET8w_28',
+		videoThumbnail: 'https://i.ytimg.com/vi_webp/yUm-ET8w_28/maxresdefault.webp'
+	});
+
 	let sections: CourseSection[] = $state([
+		{
+			name: 'Introduction',
+			lessons: [
+				{ name: 'Getting Started', completed: true, durationSeconds: 10 },
+				{ name: 'Basic Concepts', completed: true, durationSeconds: 100 },
+				{ name: 'Course Overview', completed: false, durationSeconds: 1230 }
+			]
+		},
+		{
+			name: 'Fundamentals',
+			lessons: [
+				{ name: 'Core Principles', completed: false, durationSeconds: 1110 },
+				{ name: 'Key Components', completed: false, durationSeconds: 194 },
+				{ name: 'Best Practices', completed: false, durationSeconds: 10 }
+			]
+		},
+		{
+			name: 'Advanced Topics',
+			lessons: [
+				{ name: 'Complex Scenarios', completed: false, durationSeconds: 210 },
+				{ name: 'Performance Optimization', completed: false, durationSeconds: 315 },
+				{ name: 'Security Considerations', completed: false, durationSeconds: 109 }
+			]
+		},
 		{
 			name: 'Introduction',
 			lessons: [
@@ -34,9 +70,9 @@
 	]);
 </script>
 
-<div class="flex min-h-screen flex-col-reverse md:flex-row">
+<div class="flex flex-col-reverse md:flex-row">
 	{#if sidebarOpen}
-		<aside class="pr-4 md:max-w-sm md:flex-1">
+		<aside class="overflow-scroll pr-4 md:max-w-xs md:flex-1">
 			<button
 				onclick={() => (sidebarOpen = !sidebarOpen)}
 				type="button"
@@ -58,5 +94,7 @@
 			</button>
 		</aside>
 	{/if}
-	<main class="flex-1 bg-blue-100 p-4"></main>
+	<main class="flex-1 p-4">
+		<Lesson {...lessonProperties} />
+	</main>
 </div>

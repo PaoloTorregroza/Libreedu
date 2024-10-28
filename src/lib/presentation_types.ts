@@ -21,3 +21,9 @@ export interface CourseSection {
 	name: string;
 	lessons: CourseContent[];
 }
+
+export interface LessonInformation {
+	name: string;
+	description: string;
+	completed: boolean;
+}

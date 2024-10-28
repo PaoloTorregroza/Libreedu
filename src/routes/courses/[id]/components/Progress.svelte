@@ -10,11 +10,11 @@
 	function formatTime(seconds: number): string {
 		let totalMinutes = Math.floor(seconds / 60);
 		const totalSeconds = seconds % 60;
-		return `${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}`;
+		return `${totalMinutes.toString().padStart(2, '0')}:${totalSeconds.toString().padStart(2, '0')}`;
 	}
 </script>
 
-<Accordion autocollapse>
+<Accordion>
 	{#each sections as section}
 		<AccordionItem>
 			<svelte:fragment slot="summary">
@@ -24,7 +24,11 @@
 				<ul>
 					{#each section.lessons as lesson}
 						<li class="mt-1 flex items-center justify-between text-center">
-							<span>{lesson.completed ? '✅' : '☑️'}</span>
+							<input
+								type="checkbox"
+								class="checkbox pointer-events-none"
+								checked={lesson.completed}
+							/>
 							<h6 class="mx-1">{lesson.name}</h6>
 							<p class="text-sm font-light opacity-50">{formatTime(lesson.durationSeconds)}</p>
 						</li>
