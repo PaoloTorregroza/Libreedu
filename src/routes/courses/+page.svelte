@@ -1,5 +1,19 @@
+<script module lang="ts">
+	export interface CourseCategoryPresentation {
+		name: string;
+		description: string;
+		courses: CoursePresentation[];
+	}
+
+	export interface CoursePresentation {
+		name: string;
+		thumbnailUrl: string;
+		description: string;
+		id: number;
+	}
+</script>
+
 <script lang="ts">
-	import type { CourseCategoryPresentation } from '$lib/presentation_types';
 	let categories: CourseCategoryPresentation[] = $state([
 		{
 			name: 'Free!',

@@ -1,10 +1,23 @@
-<script lang="ts">
-	import type { CourseSection } from '$lib/presentation_types';
-	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
+<script module lang="ts">
+	export interface CourseSection {
+		name: string;
+		lessons: CourseContent[];
+	}
 
-	interface ProgressProps {
+	export interface ProgressProps {
 		sections: CourseSection[];
 	}
+
+	export interface CourseContent {
+		completed: boolean;
+		name: string;
+		durationSeconds: number;
+	}
+</script>
+
+<script lang="ts">
+	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
+
 	let { sections }: ProgressProps = $props();
 
 	function formatTime(seconds: number): string {

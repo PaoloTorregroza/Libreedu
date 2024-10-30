@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { CourseSection } from '$lib/presentation_types';
 	import type { PageData } from './$types';
 	import Lesson from './block/Lesson.svelte';
-	import Progress from './components/Progress.svelte';
+	import Progress, { type CourseSection } from './components/Progress.svelte';
 
 	let data: PageData = $props();
 
