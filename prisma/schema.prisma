@@ -64,7 +64,7 @@ model User {
   Authenticator Authenticator[]
 
   // App fields
-  subscribed Boolean
+  subscribed Boolean  @default(false)
   courses    Course[] @relation(fields: [courseIDs], references: [id])
   courseIDs  String[] @db.ObjectId
 

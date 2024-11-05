@@ -28,13 +28,6 @@
     preact "10.11.3"
     preact-render-to-string "5.2.3"
 
-"@auth/mongodb-adapter@^3.7.2":
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/@auth/mongodb-adapter/-/mongodb-adapter-3.7.2.tgz#07ee0124ebd5bddfe177739688b636ac1b27b175"
-  integrity sha512-IhQ6gVFEWU1HwjwSMtL+m9qNWBIf09JcoFhRqFF1lipBIqEuL+KjJkCMUlOp5wJTPoCRb9J2AVnnJbfkA7dM9g==
-  dependencies:
-    "@auth/core" "0.37.2"
-
 "@auth/prisma-adapter@^2.7.2":
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/@auth/prisma-adapter/-/prisma-adapter-2.7.2.tgz#157284b6d6314239182d496559db29d0134355e9"
