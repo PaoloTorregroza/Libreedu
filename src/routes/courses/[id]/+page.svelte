@@ -8,7 +8,8 @@
 	let sidebarOpen = $state(true);
 
 	let lessonProperties = $state({
-		isYoutube: true,
+		isYoutube: false,
+		isText: true,
 		name: 'Test Lesson',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit cupiditate illum officiis quos suscipit asperiores exercitationem dolores possimus, eum nesciunt vel! Vero, provident culpa sunt ea nesciunt magni nihil odit.',

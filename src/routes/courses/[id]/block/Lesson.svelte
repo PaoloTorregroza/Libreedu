@@ -1,9 +1,11 @@
 <script lang="ts">
+	import Text from '../components/Text.svelte';
 	import Video from '../components/Video.svelte';
 	import YoutubeEmbed from '../components/YoutubeEmbed.svelte';
 
 	interface LessonProps {
 		isYoutube: boolean;
+		isText: boolean;
 		name: string;
 		description: string;
 		completed: boolean;
@@ -13,6 +15,7 @@
 
 	let {
 		isYoutube = true,
+		isText = false,
 		name,
 		description,
 		completed = false,
@@ -36,20 +39,25 @@
 			<input checked={completed} class="checkbox" type="checkbox" />
 		</div>
 	</div>
-	{#if isYoutube}
-		<YoutubeEmbed
-			videoId={videoUrl}
-			playLabel={name}
-			posterImageSrc={videoThumbnail}
-			params="modestbranding=1"
-		/>
+	{#if isText}
+		<Text />
 	{:else}
-		<Video />
-	{/if}
-	<h1>{name}</h1>
+		{#if isYoutube}
+			<YoutubeEmbed
+				videoId={videoUrl}
+				playLabel={name}
+				posterImageSrc={videoThumbnail}
+				params="modestbranding=1"
+			/>
+		{:else}
+			<Video />
+		{/if}
+		<h1>{name}</h1>
 
-	<p class="text-lg font-light">
-		{description}
-	</p>
+		<p class="text-lg font-light">
+			{description}
+		</p>
+	{/if}
+
 	<button class="variant-soft-primary btn max-w-lg">Next lesson</button>
 </div>
