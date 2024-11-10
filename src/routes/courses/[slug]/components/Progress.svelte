@@ -1,11 +1,9 @@
 <script module lang="ts">
-	export interface CourseSection {
-		name: string;
-		lessons: CourseContent[];
-	}
+	import type { Section } from '@prisma/client';
 
 	export interface ProgressProps {
-		sections: CourseSection[];
+		sections: Section[];
+		currentLessonIndex: number;
 	}
 
 	export interface CourseContent {
@@ -18,7 +16,7 @@
 <script lang="ts">
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 
-	let { sections }: ProgressProps = $props();
+	let { currentLessonIndex = $bindable(), sections }: ProgressProps = $props();
 
 	function formatTime(seconds: number): string {
 		let totalMinutes = Math.floor(seconds / 60);

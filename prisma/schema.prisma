@@ -19,22 +19,30 @@ enum ContentType {
 }
 
 model Course {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  slug        String
-  description String
-  thumbnail   String
-  sections    Section[]
-  users       User[]    @relation(fields: [userIDs], references: [id])
-  userIDs     String[]  @db.ObjectId
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  slug          String       @unique
+  description   String
+  thumbnail     String
+  sections      Section[]
+  users         User[]       @relation(fields: [userIDs], references: [id])
+  userIDs       String[]     @db.ObjectId
+  CourseGroup   CourseGroup? @relation(fields: [courseGroupId], references: [id])
+  courseGroupId String?      @db.ObjectId
+}
 
-  @@index([slug])
+model CourseGroup {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  courses     Course[]
 }
 
 model Section {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   Course   Course?  @relation(fields: [courseId], references: [id])
   courseId String?  @db.ObjectId
+  name     String
   lessons  Lesson[]
 }
 
@@ -44,6 +52,7 @@ model Lesson {
   description String
   contentType ContentType
   resourceUrl String
+  completed   Boolean     @default(false)
   isFree      Boolean
 
   Section   Section? @relation(fields: [sectionId], references: [id])

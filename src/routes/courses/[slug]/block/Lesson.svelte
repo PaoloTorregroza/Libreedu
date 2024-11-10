@@ -1,27 +1,10 @@
 <script lang="ts">
+	import type { Lesson } from '@prisma/client';
 	import Text from '../components/Text.svelte';
 	import Video from '../components/Video.svelte';
 	import YoutubeEmbed from '../components/YoutubeEmbed.svelte';
 
-	interface LessonProps {
-		isYoutube: boolean;
-		isText: boolean;
-		name: string;
-		description: string;
-		completed: boolean;
-		videoUrl: string;
-		videoThumbnail: string;
-	}
-
-	let {
-		isYoutube = true,
-		isText = false,
-		name,
-		description,
-		completed = false,
-		videoUrl,
-		videoThumbnail
-	}: LessonProps = $props();
+	let { lesson }: { lesson: Lesson } = $props();
 </script>
 
 <div class="flex flex-col gap-4">
@@ -36,26 +19,26 @@
 		</div>
 		<div class="flex items-center gap-4">
 			<h6>Completed:</h6>
-			<input checked={completed} class="checkbox" type="checkbox" />
+			<input checked={lesson.completed} class="checkbox" type="checkbox" />
 		</div>
 	</div>
-	{#if isText}
-		<Text />
+	{#if lesson.contentType === 'Text'}
+		<Text content={lesson.resourceUrl} />
 	{:else}
-		{#if isYoutube}
+		{#if lesson.resourceUrl.includes('youtube')}
 			<YoutubeEmbed
-				videoId={videoUrl}
-				playLabel={name}
-				posterImageSrc={videoThumbnail}
+				videoId={lesson.resourceUrl}
+				playLabel={lesson.name}
+				posterImageSrc={'Video thumbnail'}
 				params="modestbranding=1"
 			/>
 		{:else}
 			<Video />
 		{/if}
-		<h1>{name}</h1>
+		<h1>{lesson.name}</h1>
 
 		<p class="text-lg font-light">
-			{description}
+			{lesson.description}
 		</p>
 	{/if}
 

@@ -7,6 +7,10 @@
 	import { modeCurrent } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 
+	let { content }: { content: string } = $props();
+
+	console.log(content);
+
 	const highlightMarked = new Marked(
 		markedHighlight({
 			emptyLangClass: 'hljs',
@@ -19,32 +23,6 @@
 	);
 
 	let darkMode = $state(!modeCurrent);
-	let data = $state(`
-# Test
-
-This is a test
-
-<br />
-
-\`\`\`javascript
-console.log("Test")
-export const load: PageLoad = ({ params }) => {
-	if (parseInt(params.id) === 0) {
-		return {
-			title: 'Hello world!',
-			content: 'Welcome to our blog. Lorem ipsum dolor sit amet...'
-		};
-	}
-
-	error(404, 'Not found');
-};
-
-\`\`\`
-
-<br />
-
-![The San Juan Mountains are beautiful!](https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080 "San Juan Mountains")
-	`);
 
 	onMount(() => {
 		modeCurrent.subscribe((mode) => {
@@ -59,7 +37,7 @@ export const load: PageLoad = ({ params }) => {
 		href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${!darkMode ? 'dark' : 'stackoverflow-light'}.min.css`}
 	/>
 	{#if browser}
-		{#await highlightMarked.parse(data) then content}
+		{#await highlightMarked.parse(content) then content}
 			<Render html={content} />
 		{/await}
 	{/if}

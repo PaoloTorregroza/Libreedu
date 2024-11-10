@@ -21,6 +21,7 @@
 	}
 </script>
 
+/** eslint-disable svelte/valid-compile */ /** eslint-disable svelte/valid-compile */
 <svelte:head>
 	<!-- <link rel="preconnect" href="https://i.ytimg.com" /> -->
 	<!-- {#if hovered}
