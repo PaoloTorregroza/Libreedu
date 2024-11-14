@@ -27,7 +27,7 @@
 	{:else}
 		{#if lesson.resourceUrl.includes('youtube')}
 			<YoutubeEmbed
-				videoId={lesson.resourceUrl}
+				videoURL={lesson.resourceUrl}
 				playLabel={lesson.name}
 				posterImageSrc={'Video thumbnail'}
 				params="modestbranding=1"

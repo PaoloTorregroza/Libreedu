@@ -47,13 +47,13 @@ model Section {
 }
 
 model Lesson {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  description String
-  contentType ContentType
-  resourceUrl String
-  completed   Boolean     @default(false)
-  isFree      Boolean
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  description     String
+  contentType     ContentType
+  resourceUrl     String
+  isFree          Boolean
+  durationSeconds Int
 
   Section   Section? @relation(fields: [sectionId], references: [id])
   sectionId String?  @db.ObjectId

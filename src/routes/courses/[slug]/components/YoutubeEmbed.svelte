@@ -1,7 +1,7 @@
 <!-- TODO: Code found on the internet, tweak for svelte 5, and then refactor to fit needs -->
 
 <script lang="ts">
-	export let videoId: string;
+	export let videoURL: string;
 	export let playLabel = 'Play';
 	export let params = '';
 	export let posterImageSrc = '';
@@ -9,7 +9,7 @@
 	let activated = false;
 	let hovered = false;
 
-	$: videoId, (activated = false);
+	$: videoURL, (activated = false);
 	$: computedParams = (() => {
 		const p = new URLSearchParams(params);
 		p.append('autoplay', '1');
@@ -21,13 +21,12 @@
 	}
 </script>
 
-/** eslint-disable svelte/valid-compile */ /** eslint-disable svelte/valid-compile */
 <svelte:head>
-	<!-- <link rel="preconnect" href="https://i.ytimg.com" /> -->
-	<!-- {#if hovered}
+	<link rel="preconnect" href="https://i.ytimg.com" />
+	{#if hovered}
 		<link rel="preconnect" href="https://www.youtube-nocookie.com" />
 		<link rel="preconnect" href="https://www.google.com" />
-	{/if} -->
+	{/if}
 </svelte:head>
 
 <div
@@ -39,12 +38,12 @@
 	role="button"
 	tabindex="0"
 >
-	{#key videoId}
+	{#key videoURL}
 		<picture>
 			<img class="lite-youtube-poster" alt={playLabel} src={posterImageSrc} />
 		</picture>
 	{/key}
-	<button type="button" class="lite-youtube-playbtn" aria-label={playLabel} />
+	<button type="button" class="lite-youtube-playbtn" aria-label={playLabel}></button>
 	{#if activated}
 		<iframe
 			width="560"
@@ -52,9 +51,9 @@
 			title={playLabel}
 			allow="accelerometer; autoplay; encrypted-media;"
 			allowfullscreen
-			src="https://www.youtube-nocookie.com/embed/{encodeURIComponent(videoId)}?{computedParams}"
+			src="https://www.youtube-nocookie.com/embed/{encodeURIComponent(videoURL)}?{computedParams}"
 			use:focus
-		/>
+		></iframe>
 	{/if}
 </div>
 

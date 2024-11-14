@@ -9,8 +9,6 @@
 
 	let { content }: { content: string } = $props();
 
-	console.log(content);
-
 	const highlightMarked = new Marked(
 		markedHighlight({
 			emptyLangClass: 'hljs',
@@ -31,7 +29,7 @@
 	});
 </script>
 
-<div>
+<div class="flex flex-col gap-3 p-8 pr-16">
 	<link
 		rel="stylesheet"
 		href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${!darkMode ? 'dark' : 'stackoverflow-light'}.min.css`}

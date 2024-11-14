@@ -21,7 +21,7 @@
 				<span>←</span>
 				<span>Hide</span>
 			</button>
-			<Progress {currentLessonIndex} sections={data.sections} />
+			<Progress bind:currentLessonIndex bind:currentSectionIndex sections={data.sections} />
 		</aside>
 	{:else}
 		<aside>
