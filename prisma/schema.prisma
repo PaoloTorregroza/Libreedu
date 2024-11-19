@@ -55,8 +55,20 @@ model Lesson {
   isFree          Boolean
   durationSeconds Int
 
-  Section   Section? @relation(fields: [sectionId], references: [id])
-  sectionId String?  @db.ObjectId
+  Section     Section?         @relation(fields: [sectionId], references: [id])
+  sectionId   String?          @db.ObjectId
+  completedBy UsersOnLessons[]
+}
+
+model UsersOnLessons {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  lessonId    String   @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  lesson      Lesson   @relation(fields: [lessonId], references: [id])
+  completedAt DateTime @default(now())
+
+  @@unique([userId, lessonId]) // Garantiza que no haya duplicados
 }
 
 // Authjs stuff and user information
@@ -77,8 +89,9 @@ model User {
   courses    Course[] @relation(fields: [courseIDs], references: [id])
   courseIDs  String[] @db.ObjectId
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  completedLessons UsersOnLessons[]
 }
 
 model Account {

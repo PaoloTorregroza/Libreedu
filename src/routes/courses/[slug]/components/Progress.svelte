@@ -1,10 +1,11 @@
 <script module lang="ts">
-	import type { Section } from '@prisma/client';
+	import type { Section, UsersOnLessons } from '@prisma/client';
 
 	export interface ProgressProps {
 		sections: Section[];
 		currentLessonIndex: number;
 		currentSectionIndex: number;
+		completedLessons: UsersOnLessons[];
 	}
 
 	export interface CourseContent {
@@ -20,13 +21,23 @@
 	let {
 		currentLessonIndex = $bindable(),
 		currentSectionIndex = $bindable(),
-		sections
+		sections,
+		completedLessons
 	}: ProgressProps = $props();
 
 	function formatTime(seconds: number): string {
 		let totalMinutes = Math.floor(seconds / 60);
 		const totalSeconds = seconds % 60;
 		return `${totalMinutes.toString().padStart(2, '0')}:${totalSeconds.toString().padStart(2, '0')}`;
+	}
+
+	function isLessonCompleted(sectionIndex: number, lessonIndex: number): boolean {
+		const currentId = sections[sectionIndex].lessons[lessonIndex].id;
+		const lessonCompleted = completedLessons.find((el) => {
+			return el.lessonId === currentId;
+		});
+
+		return lessonCompleted !== undefined;
 	}
 </script>
 
@@ -52,7 +63,7 @@
 							<input
 								type="checkbox"
 								class="checkbox pointer-events-none"
-								checked={lesson.completed}
+								checked={isLessonCompleted(sectionIndex, lessonIndex)}
 							/>
 							<h6 class="mx-1">{lesson.name}</h6>
 							<p class="text-sm font-light opacity-50">{formatTime(lesson.durationSeconds)}</p>

@@ -8,6 +8,14 @@
 
 	let currentSectionIndex = $state(0);
 	let currentLessonIndex = $state(0);
+	let currentLessonCompleted = $derived.by(() => {
+		const currentId = data.course.sections[currentSectionIndex].lessons[currentLessonIndex].id;
+		const lessonCompleted = data.completedLessons?.find((el) => {
+			return el.lessonId === currentId;
+		});
+
+		return lessonCompleted !== undefined;
+	});
 </script>
 
 <div class="flex flex-col-reverse md:flex-row">
@@ -21,7 +29,12 @@
 				<span>←</span>
 				<span>Hide</span>
 			</button>
-			<Progress bind:currentLessonIndex bind:currentSectionIndex sections={data.sections} />
+			<Progress
+				completedLessons={data.completedLessons || []}
+				bind:currentLessonIndex
+				bind:currentSectionIndex
+				sections={data.course.sections}
+			/>
 		</aside>
 	{:else}
 		<aside>
@@ -35,6 +48,9 @@
 		</aside>
 	{/if}
 	<main class="flex-1 p-4">
-		<Lesson lesson={data.sections[currentSectionIndex].lessons[currentLessonIndex]} />
+		<Lesson
+			completed={currentLessonCompleted}
+			lesson={data.course.sections[currentSectionIndex].lessons[currentLessonIndex]}
+		/>
 	</main>
 </div>

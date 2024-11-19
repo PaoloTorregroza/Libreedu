@@ -3,8 +3,26 @@
 	import Text from '../components/Text.svelte';
 	import Video from '../components/Video.svelte';
 	import YoutubeEmbed from '../components/YoutubeEmbed.svelte';
+	import { invalidateAll } from '$app/navigation';
 
-	let { lesson }: { lesson: Lesson } = $props();
+	let { lesson, completed }: { lesson: Lesson; completed: boolean } = $props();
+
+	async function completeLesson(lessonId: string) {
+		try {
+			const response = await fetch(`/api/lessons/${lessonId}/complete`, {
+				method: 'POST'
+			});
+
+			if (response.ok) {
+				invalidateAll();
+			} else {
+				const errorData = await response.json();
+				console.error('Error:', errorData.message);
+			}
+		} catch (err) {
+			console.error('An unexpected error occurred:', err);
+		}
+	}
 </script>
 
 <div class="flex flex-col gap-4">
@@ -19,7 +37,16 @@
 		</div>
 		<div class="flex items-center gap-4">
 			<h6>Completed:</h6>
-			<input checked={lesson.completed} class="checkbox" type="checkbox" />
+			<input
+				onchange={() => {
+					if (completed) {
+						completeLesson(lesson.id);
+					}
+				}}
+				bind:checked={completed}
+				class="checkbox"
+				type="checkbox"
+			/>
 		</div>
 	</div>
 	{#if lesson.contentType === 'Text'}
