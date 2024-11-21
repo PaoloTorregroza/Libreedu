@@ -23,6 +23,23 @@
 			console.error('An unexpected error occurred:', err);
 		}
 	}
+
+	async function uncompleteLesson(lessonId: string) {
+		try {
+			const response = await fetch(`/api/lessons/${lessonId}/complete`, {
+				method: 'DELETE'
+			});
+
+			if (response.ok) {
+				invalidateAll();
+			} else {
+				const errorData = await response.json();
+				console.error('Error:', errorData.message);
+			}
+		} catch (err) {
+			console.error('An unexpected error occurred:', err);
+		}
+	}
 </script>
 
 <div class="flex flex-col gap-4">
@@ -41,6 +58,8 @@
 				onchange={() => {
 					if (completed) {
 						completeLesson(lesson.id);
+					} else {
+						uncompleteLesson(lesson.id);
 					}
 				}}
 				bind:checked={completed}

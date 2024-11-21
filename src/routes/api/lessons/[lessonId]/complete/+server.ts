@@ -28,8 +28,6 @@ export const POST: RequestHandler = async ({ params, locals }) => {
 
 		// TODO: Check if user owns the selected course.
 
-		console.log(session.user.id);
-
 		await prisma.usersOnLessons.create({
 			data: {
 				userId: userId,
@@ -41,5 +39,36 @@ export const POST: RequestHandler = async ({ params, locals }) => {
 	} catch (e) {
 		console.error(e);
 		throw error(500, 'An error occurred while completing the lesson.');
+	}
+};
+
+export const DELETE: RequestHandler = async ({ params, locals }) => {
+	const session = await locals.auth();
+
+	try {
+		if (!session?.user) {
+			throw error(401, 'Unauthorized');
+		}
+
+		let userId = session.user.id;
+
+		if (!userId) {
+			const user = await prisma.user.findUnique({ where: { email: session.user.email! } });
+
+			if (!user) {
+				throw error(404, 'No user found with email');
+			}
+
+			userId = user.id;
+		}
+
+		await prisma.usersOnLessons.deleteMany({
+			where: { userId: userId, lessonId: params.lessonId! }
+		});
+
+		return json({ message: 'Lesson marked as uncompleted' });
+	} catch (e) {
+		console.error(e);
+		throw error(500, 'An error ocurred while unmarking lesson as completed');
 	}
 };
