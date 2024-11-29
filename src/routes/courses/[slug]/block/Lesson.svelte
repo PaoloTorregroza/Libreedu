@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Lesson } from '@prisma/client';
 	import Text from '../components/Text.svelte';
-	import Video from '../components/Video.svelte';
-	import YoutubeEmbed from '../components/YoutubeEmbed.svelte';
+	// import Video from '../components/Video.svelte';
 	import { invalidateAll } from '$app/navigation';
+	import YoutubeVideo from '../components/YoutubeVideo.svelte';
 
 	let { lesson, completed }: { lesson: Lesson; completed: boolean } = $props();
 
@@ -71,16 +71,7 @@
 	{#if lesson.contentType === 'Text'}
 		<Text content={lesson.resourceUrl} />
 	{:else}
-		{#if lesson.resourceUrl.includes('youtube')}
-			<YoutubeEmbed
-				videoURL={lesson.resourceUrl}
-				playLabel={lesson.name}
-				posterImageSrc={'Video thumbnail'}
-				params="modestbranding=1"
-			/>
-		{:else}
-			<Video />
-		{/if}
+		<YoutubeVideo videoId={lesson.resourceUrl} params="modestbranding=1" />
 		<h1>{lesson.name}</h1>
 
 		<p class="text-lg font-light">
@@ -88,5 +79,8 @@
 		</p>
 	{/if}
 
-	<button class="variant-soft-primary btn max-w-lg">Next lesson</button>
+	<button
+		class="variant-soft-primary btn max-w-lg"
+		onclick={async () => await completeLesson(lesson.id)}>Next lesson</button
+	>
 </div>

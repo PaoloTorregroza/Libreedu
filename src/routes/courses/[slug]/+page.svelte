@@ -7,7 +7,7 @@
 	let sidebarOpen = $state(true);
 
 	let currentSectionIndex = $state(0);
-	let currentLessonIndex = $state(0);
+	let currentLessonIndex = $state(1);
 	let currentLessonCompleted = $derived.by(() => {
 		const currentId = data.course.sections[currentSectionIndex].lessons[currentLessonIndex].id;
 		const lessonCompleted = data.completedLessons?.find((el) => {
