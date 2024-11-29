@@ -1,15 +1,30 @@
 <script lang="ts">
 	import '../app.css';
-	import { AppBar, LightSwitch } from '@skeletonlabs/skeleton';
+
+	import { page } from '$app/stores';
+	import { AppBar, LightSwitch, Avatar } from '@skeletonlabs/skeleton';
 	let { children } = $props();
 </script>
 
 <div class="grid h-screen grid-rows-[auto_1fr_auto] overflow-scroll">
 	<AppBar class="sticky top-0 z-10">
 		<svelte:fragment slot="lead"><div></div></svelte:fragment>
-		<h1 class="text-3xl">Coursekit</h1>
+		<a href="/">
+			<h1 class="text-3xl">Coursekit</h1>
+		</a>
 		<svelte:fragment slot="trail">
-			<div>
+			<div class="flex items-center gap-4">
+				{#if $page.data.session}
+					<a href="/account">
+						<Avatar
+							src={$page.data.session.user!.image || ''}
+							width="w-8"
+							cursor="cursor-pointer"
+							border="border-2 border-surface-300-600-token hover:!border-primary-500"
+							rounded="rounded-full"
+						/>
+					</a>
+				{/if}
 				<LightSwitch />
 			</div>
 		</svelte:fragment>

@@ -5,6 +5,7 @@
 
 <div>
 	<img alt="Company logo" />
+	<a href="/courses">All courses<br /></a>
 	{#if $page.data.session}
 		<button onclick={() => signOut()}>SignOut </button>
 	{:else}
