@@ -8,10 +8,15 @@
 
 <div class="grid h-screen grid-rows-[auto_1fr_auto] overflow-scroll">
 	<AppBar class="sticky top-0 z-10">
-		<svelte:fragment slot="lead"><div></div></svelte:fragment>
-		<a href="/">
-			<h1 class="text-3xl">Coursekit</h1>
-		</a>
+		<svelte:fragment slot="lead"
+			><div class="flex items-center gap-6">
+				<a href="/">
+					<h1 class="text-2xl">Coursekit</h1>
+				</a>
+				<a href="/courses">Courses<br /></a>
+			</div>
+		</svelte:fragment>
+
 		<svelte:fragment slot="trail">
 			<div class="flex items-center gap-4">
 				{#if $page.data.session}
