@@ -1,23 +1,65 @@
 <script lang="ts" module>
-	type LandingInfo = {
+	type HeroInfo = {
 		title: string;
 		subtitle: string;
-		heroImageURL: string;
-		heroCallToAction: string;
-		heroButton: string;
+		imageURL: string;
+		callToAction: string;
+		buttonText: string;
+	};
+
+	type KeyPoint = {
+		title: string;
+		iconURL: string;
+		description: string;
+	};
+
+	type LandingInfo = {
+		hero: HeroInfo;
+		keyPoints: KeyPoint[];
 	};
 </script>
 
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { signIn } from '@auth/sveltekit/client';
+	import FeatureSection from './components/FeatureSection.svelte';
 
 	let landingInfo: LandingInfo = $state({
-		title: 'Lorem ipsum dolor sit amet',
-		subtitle: 'Improve your hard skills one step at a time.',
-		heroImageURL: 'https://cdn.paolinsky-minis.com/paolinskyCourses/Code%20typing-pana.svg',
-		heroCallToAction: 'Join now and increase your skills. Join now and increase your skills',
-		heroButton: 'Start free!'
+		hero: {
+			title: 'Lorem ipsum dolor sit amet',
+			subtitle: 'Improve your hard skills one step at a time.',
+			imageURL: 'https://cdn.paolinsky-minis.com/paolinskyCourses/Code%20typing-pana.svg',
+			callToAction: 'Join now and increase your skills. Join now and increase your skills',
+			buttonText: 'Start free!'
+		},
+		keyPoints: [
+			{
+				title: 'A title',
+				iconURL:
+					'https://paolinsky-minis-assets.nyc3.cdn.digitaloceanspaces.com/paolinskyCourses/accelerate-svgrepo-com.svg',
+				description: 'Lorem ipsum dolor sit amet bla vli sadedsa b, lorem ipsum dolor sit amet'
+			},
+			{
+				title: 'A title',
+				iconURL:
+					'https://paolinsky-minis-assets.nyc3.cdn.digitaloceanspaces.com/paolinskyCourses/accelerate-svgrepo-com.svg',
+				description: 'Lorem ipsum dolor sit amet bla vli sadedsa b, lorem ipsum dolor sit amet'
+			},
+			{
+				title: 'A title',
+				iconURL:
+					'https://paolinsky-minis-assets.nyc3.cdn.digitaloceanspaces.com/paolinskyCourses/accelerate-svgrepo-com.svg',
+
+				description: 'Lorem ipsum dolor sit amet bla vli sadedsa b, lorem ipsum dolor sit amet'
+			},
+			{
+				title: 'A title',
+				iconURL:
+					'https://paolinsky-minis-assets.nyc3.cdn.digitaloceanspaces.com/paolinskyCourses/accelerate-svgrepo-com.svg',
+
+				description: 'Lorem ipsum dolor sit amet bla vli sadedsa b, lorem ipsum dolor sit amet'
+			}
+		]
 	});
 </script>
 
@@ -29,30 +71,46 @@
 	{/if}
 
 	<!-- HERO -->
-	<div class="flex w-full max-w-[1410px] flex-col md:flex-row">
+	<section class="flex w-full max-w-[1410px] flex-col md:flex-row">
 		<div class="flex flex-1 flex-col justify-center p-10 text-center md:text-start">
-			<h1 class="text-4xl md:text-7xl">{landingInfo.title}</h1>
-			<h2 class="font-light">{landingInfo.subtitle}</h2>
+			<h1 class="text-4xl md:text-7xl">{landingInfo.hero.title}</h1>
+			<h2 class="font-light">{landingInfo.hero.subtitle}</h2>
 
 			<div
 				class="mt-10 flex flex-col items-center justify-center gap-2 text-start md:flex-row md:justify-normal md:gap-4"
 			>
 				<button class="variant-filled-primary btn-md whitespace-nowrap rounded-lg md:btn-lg"
-					>{landingInfo.heroButton}</button
+					>{landingInfo.hero.buttonText}</button
 				>
-				<h4 class="font-light">{landingInfo.heroCallToAction}</h4>
+				<h4 class="font-light">{landingInfo.hero.callToAction}</h4>
 			</div>
 		</div>
 		<div class="flex-1">
 			<img
 				class="h-full w-full"
-				src={landingInfo.heroImageURL}
+				src={landingInfo.hero.imageURL}
 				alt="Descriptive course platform figure"
 			/>
 		</div>
-	</div>
+	</section>
 
 	<!-- KEY POINTS -->
+	<section>
+		<div class="flex w-full flex-col justify-center gap-6 p-16 md:flex-row md:gap-10">
+			{#each landingInfo.keyPoints.slice(0, 3) as el}
+				<div class="card flex-1 p-5">
+					<div class="flex items-center gap-2 text-primary-500">
+						<img class="h-10 w-10 overflow-hidden" src={el.iconURL} alt="Feature Icon" />
+						<h4 class=" font-bold">{el.title}</h4>
+					</div>
+					<p class="mt-3">{el.description}</p>
+				</div>
+			{/each}
+		</div>
+
+		<FeatureSection />
+		<FeatureSection />
+	</section>
 
 	<!-- STORIES -->
 
