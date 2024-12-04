@@ -1,18 +1,3 @@
-<script module lang="ts">
-	export interface CourseCategory {
-		name: string;
-		description: string;
-		courses: CoursePresentation[];
-	}
-
-	export interface CoursePresentation {
-		name: string;
-		thumbnailUrl: string;
-		description: string;
-		id: number;
-	}
-</script>
-
 <script lang="ts">
 	let { data } = $props();
 </script>

@@ -1,17 +1,12 @@
 <script module lang="ts">
-	import type { Section, UsersOnLessons } from '@prisma/client';
+	import type { UsersOnLessons } from '@prisma/client';
+	import type { SectionWithLessons } from '$lib/types/db';
 
 	export interface ProgressProps {
-		sections: Section[];
+		sections: SectionWithLessons[];
 		currentLessonIndex: number;
 		currentSectionIndex: number;
 		completedLessons: UsersOnLessons[];
-	}
-
-	export interface CourseContent {
-		completed: boolean;
-		name: string;
-		durationSeconds: number;
 	}
 </script>
 
