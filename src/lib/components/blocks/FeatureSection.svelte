@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import type { FeatureContent } from '../+page.svelte';
+	import type { FeatureContent } from '../../../routes/+page.svelte';
 
 	export type FeatureSectionProps = {
 		content: FeatureContent;

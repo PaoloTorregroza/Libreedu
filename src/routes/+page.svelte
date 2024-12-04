@@ -30,8 +30,8 @@
 
 <script lang="ts">
 	import { page } from '$app/stores';
+	import FeatureSection from '$lib/components/blocks/FeatureSection.svelte';
 	import { signIn } from '@auth/sveltekit/client';
-	import FeatureSection from './components/FeatureSection.svelte';
 
 	let landingInfo: LandingInfo = $state({
 		hero: {

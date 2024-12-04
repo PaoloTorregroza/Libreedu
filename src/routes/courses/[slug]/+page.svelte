@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Lesson from './block/Lesson.svelte';
-	import Progress from './components/Progress.svelte';
+	import Lesson from '$lib/components/blocks/Lesson.svelte';
+	import Progress from '$lib/components/blocks/Progress.svelte';
 
 	let { data } = $props();
 

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Lesson } from '@prisma/client';
-	import Text from '../components/Text.svelte';
 	// import Video from '../components/Video.svelte';
 	import { invalidateAll } from '$app/navigation';
-	import YoutubeVideo from '../components/YoutubeVideo.svelte';
+	import YoutubeVideo from '$lib/components/core/YoutubeVideo.svelte';
+	import TextLesson from '$lib/components/core/TextLesson.svelte';
 
 	let { lesson, completed }: { lesson: Lesson; completed: boolean } = $props();
 
@@ -69,7 +69,7 @@
 		</div>
 	</div>
 	{#if lesson.contentType === 'Text'}
-		<Text content={lesson.resourceUrl} />
+		<TextLesson content={lesson.resourceUrl} />
 	{:else}
 		<YoutubeVideo videoId={lesson.resourceUrl} params="modestbranding=1" />
 		<h1>{lesson.name}</h1>
