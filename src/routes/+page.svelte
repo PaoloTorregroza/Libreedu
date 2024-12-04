@@ -1,4 +1,12 @@
 <script lang="ts" module>
+	export type FeatureContent = {
+		imageURL: string;
+		title: string;
+		subtitle: string;
+		bulletPoints: string[];
+		reversed: boolean;
+	};
+
 	type HeroInfo = {
 		title: string;
 		subtitle: string;
@@ -16,6 +24,7 @@
 	type LandingInfo = {
 		hero: HeroInfo;
 		keyPoints: KeyPoint[];
+		features: FeatureContent[];
 	};
 </script>
 
@@ -59,11 +68,27 @@
 
 				description: 'Lorem ipsum dolor sit amet bla vli sadedsa b, lorem ipsum dolor sit amet'
 			}
+		],
+		features: [
+			{
+				imageURL: 'https://cdn.paolinsky-minis.com/paolinskyCourses/Code%20typing-pana.svg',
+				title: 'Lorem ipsum dolor sit amet Feature name!',
+				subtitle: 'Feature subtitle lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
+				bulletPoints: ['fast', 'safe', 'Lorem ipsum dolor'],
+				reversed: false
+			},
+			{
+				imageURL: 'https://cdn.paolinsky-minis.com/paolinskyCourses/Code%20typing-pana.svg',
+				title: 'Lorem ipsum dolor sit amet Feature name!',
+				subtitle: 'Feature subtitle lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
+				bulletPoints: ['Lorem ipsum dolor', 'fast', 'safe'],
+				reversed: true
+			}
 		]
 	});
 </script>
 
-<div class="flex w-full flex-col items-center">
+<div class="flex w-full flex-col items-center gap-8 p-10">
 	{#if $page.data.session}
 		<div></div>
 	{:else}
@@ -71,8 +96,8 @@
 	{/if}
 
 	<!-- HERO -->
-	<section class="flex w-full max-w-[1410px] flex-col md:flex-row">
-		<div class="flex flex-1 flex-col justify-center p-10 text-center md:text-start">
+	<section class="flex w-full max-w-[1410px] flex-col gap-10 md:flex-row">
+		<div class="flex flex-1 flex-col justify-center text-center md:text-start">
 			<h1 class="text-4xl md:text-7xl">{landingInfo.hero.title}</h1>
 			<h2 class="font-light">{landingInfo.hero.subtitle}</h2>
 
@@ -107,10 +132,10 @@
 				</div>
 			{/each}
 		</div>
-
-		<FeatureSection />
-		<FeatureSection />
 	</section>
+	{#each landingInfo.features as content}
+		<FeatureSection {content} />
+	{/each}
 
 	<!-- STORIES -->
 
