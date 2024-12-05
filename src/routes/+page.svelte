@@ -1,37 +1,11 @@
-<script lang="ts" module>
-	export type FeatureContent = {
-		imageURL: string;
-		title: string;
-		subtitle: string;
-		bulletPoints: string[];
-		reversed: boolean;
-	};
-
-	type HeroInfo = {
-		title: string;
-		subtitle: string;
-		imageURL: string;
-		callToAction: string;
-		buttonText: string;
-	};
-
-	type KeyPoint = {
-		title: string;
-		iconURL: string;
-		description: string;
-	};
-
-	type LandingInfo = {
-		hero: HeroInfo;
-		keyPoints: KeyPoint[];
-		features: FeatureContent[];
-	};
-</script>
-
 <script lang="ts">
 	import { page } from '$app/stores';
-	import FeatureSection from '$lib/components/blocks/FeatureSection.svelte';
+	import FeatureSection from '$lib/components/landing/FeatureSection.svelte';
+	import UserStory from '$lib/components/landing/UserStory.svelte';
+	import type { LandingInfo } from '$lib/types/landing.types';
 	import { signIn } from '@auth/sveltekit/client';
+
+	let hiddenSections = $state(true);
 
 	let landingInfo: LandingInfo = $state({
 		hero: {
@@ -84,6 +58,57 @@
 				bulletPoints: ['Lorem ipsum dolor', 'fast', 'safe'],
 				reversed: true
 			}
+		],
+		userStories: [
+			{
+				name: 'Paolo Torregrosa',
+				content:
+					'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?',
+				title: 'Product Owner',
+				pictureURL: 'https://avatars.githubusercontent.com/u/29853181?v=4'
+			},
+			{
+				name: 'Paolo Torregrosa',
+				content:
+					'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?',
+				title: 'Product Owner',
+				pictureURL: 'https://avatars.githubusercontent.com/u/29853181?v=4'
+			},
+			{
+				name: 'Paolo Torregrosa',
+				content:
+					'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?',
+				title: 'Product Owner',
+				pictureURL: 'https://avatars.githubusercontent.com/u/29853181?v=4'
+			},
+			{
+				name: 'Paolo Torregrosa',
+				content:
+					'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?',
+				title: 'Product Owner',
+				pictureURL: 'https://avatars.githubusercontent.com/u/29853181?v=4'
+			},
+			{
+				name: 'Paolo Torregrosa',
+				content:
+					'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?',
+				title: 'Product Owner',
+				pictureURL: 'https://avatars.githubusercontent.com/u/29853181?v=4'
+			},
+			{
+				name: 'Paolo Torregrosa',
+				content:
+					'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?',
+				title: '@paolinsky | Senior Dev',
+				pictureURL: 'https://avatars.githubusercontent.com/u/29853181?v=4'
+			},
+			{
+				name: 'Paolo Torregrosa',
+				content:
+					'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ad aperiam distinctio ut fuga? Soluta fuga aperiam omnis, quia eveniet delectus perferendis alias vel temporibus dolorum praesentium cumque cum non?',
+				title: 'Product Owner',
+				pictureURL: 'https://avatars.githubusercontent.com/u/29853181?v=4'
+			}
 		]
 	});
 </script>
@@ -121,7 +146,7 @@
 
 	<!-- KEY POINTS -->
 	<section>
-		<div class="flex w-full flex-col justify-center gap-6 p-16 md:flex-row md:gap-10">
+		<div class="flex w-full flex-col justify-center gap-6 md:flex-row md:gap-10 md:p-16">
 			{#each landingInfo.keyPoints.slice(0, 3) as el}
 				<div class="card flex-1 p-5">
 					<div class="flex items-center gap-2 text-primary-500">
@@ -138,8 +163,34 @@
 	{/each}
 
 	<!-- STORIES -->
+	<section class="items-center text-center">
+		<h2 class="m-4 mb-10">What people says about Coursekit</h2>
+		<div class:stories-hidden={hiddenSections} class="relative">
+			<div class="columns-1 gap-5 sm:columns-2 sm:gap-7 md:columns-3">
+				{#each landingInfo.userStories as story}
+					<UserStory {story} />
+				{/each}
+			</div>
 
+			<div
+				class:hidden={!hiddenSections}
+				class=" pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-surface-50 dark:to-surface-900"
+			></div>
+		</div>
+		<button
+			class="variant-filled-primary btn z-50 rounded-lg"
+			class:mt-4={!hiddenSections}
+			onclick={() => (hiddenSections = !hiddenSections)}
+			>{hiddenSections ? 'See all' : 'Hide'}</button
+		>
+	</section>
 	<!-- FAQ -->
 
 	<!-- CALL TO ACTION -->
 </div>
+
+<style>
+	.stories-hidden {
+		@apply max-h-[350px] overflow-hidden;
+	}
+</style>
