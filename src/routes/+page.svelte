@@ -109,11 +109,16 @@
 				title: 'Product Owner',
 				pictureURL: 'https://avatars.githubusercontent.com/u/29853181?v=4'
 			}
-		]
+		],
+		callToAction: {
+			buttonText: 'Action',
+			tagline: 'Tagline',
+			title: 'Long headline to turn visitors into users.'
+		}
 	});
 </script>
 
-<div class="flex w-full flex-col items-center gap-8 p-10">
+<div class="flex w-full flex-col items-center gap-16 p-10">
 	{#if $page.data.session}
 		<div></div>
 	{:else}
@@ -178,7 +183,7 @@
 			></div>
 		</div>
 		<button
-			class="variant-filled-primary btn z-50 rounded-lg"
+			class="variant-filled-secondary btn z-50 rounded-lg"
 			class:mt-4={!hiddenSections}
 			onclick={() => (hiddenSections = !hiddenSections)}
 			>{hiddenSections ? 'See all' : 'Hide'}</button
@@ -187,6 +192,13 @@
 	<!-- FAQ -->
 
 	<!-- CALL TO ACTION -->
+	<section class="mt-8 max-w-[1410px] p-10 text-center">
+		<h3>{landingInfo.callToAction.tagline}</h3>
+		<h2 class="text-5xl">{landingInfo.callToAction.title}</h2>
+		<button class="variant-filled-primary btn-lg mt-8 rounded-lg"
+			>{landingInfo.callToAction.buttonText}</button
+		>
+	</section>
 </div>
 
 <style>

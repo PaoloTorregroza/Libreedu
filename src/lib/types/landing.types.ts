@@ -27,9 +27,16 @@ export type UserStory = {
 	pictureURL: string;
 };
 
+export type CallToActionContent = {
+	tagline: string;
+	title: string;
+	buttonText: string;
+};
+
 export type LandingInfo = {
 	hero: HeroInfo;
 	keyPoints: KeyPoint[];
 	features: FeatureContent[];
 	userStories: UserStory[];
+	callToAction: CallToActionContent;
 };

@@ -3,8 +3,6 @@
 	import { Avatar } from '@skeletonlabs/skeleton';
 
 	let { story }: { story: UserStory } = $props();
-
-	console.log(story.content);
 </script>
 
 <!-- <div class="card w-full max-w-[410px] p-4 md:max-w-[360px]"> -->
