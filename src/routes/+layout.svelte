@@ -11,7 +11,7 @@
 		<svelte:fragment slot="lead"
 			><div class="flex items-center gap-6">
 				<a href="/">
-					<h1 class="text-2xl">Coursekit</h1>
+					<h1 class="text-2xl">Libreedu</h1>
 				</a>
 				<a href="/courses">Courses<br /></a>
 			</div>
