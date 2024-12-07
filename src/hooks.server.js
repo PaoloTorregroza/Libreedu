@@ -1,6 +1,6 @@
 // Sveltekit hooks are app-wide functions, authjs requires handle to be a hook function
 
-import { redirect, type Handle } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import { handle as authenticationHandle } from './auth';
 import { sequence } from '@sveltejs/kit/hooks';
 
@@ -9,7 +9,7 @@ async function authorizationHandle({ event, resolve }) {
 		const session = await event.locals.auth();
 		if (!session) {
 			// Redirect to the signin page
-			throw redirect(303, '/login');
+			throw redirect(303, 'auth/signin');
 		}
 	}
 
@@ -20,4 +20,4 @@ async function authorizationHandle({ event, resolve }) {
 // First handle authentication, then authorization
 // Each function acts as a middleware, receiving the request handle
 // And returning a handle which gets passed to the next function
-export const handle: Handle = sequence(authenticationHandle, authorizationHandle);
+export const handle = sequence(authenticationHandle, authorizationHandle);

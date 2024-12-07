@@ -119,12 +119,6 @@
 </script>
 
 <div class="flex w-full flex-col items-center gap-16 p-10">
-	{#if $page.data.session}
-		<div></div>
-	{:else}
-		<button onclick={() => signIn()}> Sign In </button>
-	{/if}
-
 	<!-- HERO -->
 	<section class="flex w-full max-w-[1410px] flex-col gap-10 md:flex-row">
 		<div class="flex flex-1 flex-col justify-center text-center md:text-start">
@@ -169,7 +163,7 @@
 
 	<!-- STORIES -->
 	<section class="items-center text-center">
-		<h2 class="m-4 mb-10">What people says about Coursekit</h2>
+		<h2 class="m-4 mb-10">What people says about Libreedu</h2>
 		<div class:stories-hidden={hiddenSections} class="relative">
 			<div class="columns-1 gap-5 sm:columns-2 sm:gap-7 md:columns-3">
 				{#each landingInfo.userStories as story}

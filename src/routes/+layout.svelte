@@ -3,6 +3,8 @@
 
 	import { page } from '$app/stores';
 	import { AppBar, LightSwitch, Avatar } from '@skeletonlabs/skeleton';
+	import { signIn } from '@auth/sveltekit/client';
+
 	let { children } = $props();
 </script>
 
@@ -11,7 +13,7 @@
 		<svelte:fragment slot="lead"
 			><div class="flex items-center gap-6">
 				<a href="/">
-					<h1 class="text-2xl">Coursekit</h1>
+					<h1 class="text-2xl">Libreedu</h1>
 				</a>
 				<a href="/courses">Courses<br /></a>
 			</div>
@@ -29,6 +31,10 @@
 							rounded="rounded-full"
 						/>
 					</a>
+				{:else}
+					<button onclick={signIn} class="variant-glass-primary btn-sm rounded-lg"
+						>SignIn / SignUp</button
+					>
 				{/if}
 				<LightSwitch />
 			</div>

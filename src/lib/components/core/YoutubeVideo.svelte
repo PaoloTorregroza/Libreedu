@@ -22,7 +22,7 @@
 	}
 </script>
 
-<div class="left-0 top-0 flex h-full w-full items-center justify-center">
+<div class="left-0 top-0 flex h-full max-h-[88vh] w-full items-center justify-center">
 	<iframe
 		title="youtube lesson"
 		src={`https://www.youtube-nocookie.com/embed/${videoId}?${computedParams}`}
