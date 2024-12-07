@@ -3,6 +3,8 @@
 
 	import { page } from '$app/stores';
 	import { AppBar, LightSwitch, Avatar } from '@skeletonlabs/skeleton';
+	import { signIn } from '@auth/sveltekit/client';
+
 	let { children } = $props();
 </script>
 
@@ -29,6 +31,10 @@
 							rounded="rounded-full"
 						/>
 					</a>
+				{:else}
+					<button onclick={signIn} class="variant-glass-primary btn-sm rounded-lg"
+						>SignIn / SignUp</button
+					>
 				{/if}
 				<LightSwitch />
 			</div>

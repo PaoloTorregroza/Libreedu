@@ -27,7 +27,14 @@
 			</div>
 		</div>
 		<div class="card-footer">
-			<button class="btn-md bg-primary-500" onclick={() => signOut()}> Sign Out </button>
+			<button
+				class="btn-md bg-primary-500"
+				onclick={() => {
+					signOut({ callbackUrl: '/' });
+				}}
+			>
+				Sign Out
+			</button>
 		</div>
 	</div>
 </div>
