@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import { AppBar, LightSwitch, Avatar } from '@skeletonlabs/skeleton';
 	import { signIn } from '@auth/sveltekit/client';
+	import { getInitials } from '$lib/utils/get_initials';
 
 	let { children } = $props();
 </script>
@@ -23,16 +24,25 @@
 			<div class="flex items-center gap-4">
 				{#if $page.data.session}
 					<a href="/account">
-						<Avatar
-							src={$page.data.session.user!.image || ''}
-							width="w-8"
-							cursor="cursor-pointer"
-							border="border-2 border-surface-300-600-token hover:!border-primary-500"
-							rounded="rounded-full"
-						/>
+						{#if $page.data.session.user!.image}
+							<Avatar
+								src={$page.data.session.user!.image}
+								width="w-8"
+								cursor="cursor-pointer"
+								border="border-2 border-surface-300-600-token hover:!border-primary-500"
+							/>
+						{:else}
+							<Avatar
+								initials={getInitials($page.data.session.user!.name ?? 'NA')}
+								width="w-8"
+								cursor="cursor-pointer"
+								background="dark:bg-secondary-500 bg-warning-600"
+								border="border-2 border-surface-300-600-token hover:!border-primary-500"
+							/>
+						{/if}
 					</a>
 				{:else}
-					<button onclick={signIn} class="variant-glass-primary btn-sm rounded-lg"
+					<button onclick={() => signIn()} class="variant-glass-primary btn-sm rounded-lg"
 						>SignIn / SignUp</button
 					>
 				{/if}

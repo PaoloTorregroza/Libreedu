@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import FeatureSection from '$lib/components/landing/FeatureSection.svelte';
-	import UserStory from '$lib/components/landing/UserStory.svelte';
+	import FeatureSection from '$lib/components/blocks/landing/FeatureSection.svelte';
+	import UserStory from '$lib/components/blocks/landing/UserStory.svelte';
 	import type { LandingInfo } from '$lib/types/landing.types';
-	import { signIn } from '@auth/sveltekit/client';
 
 	let hiddenSections = $state(true);
 
