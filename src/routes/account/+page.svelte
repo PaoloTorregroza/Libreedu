@@ -14,8 +14,8 @@
 </script>
 
 <div class="flex w-full justify-center">
-	<div class="card flex w-full flex-col items-center gap-4 p-4 md:w-2/3">
-		<div class="card-header flex w-full gap-4">
+	<div class="card flex w-full max-w-[1410px] flex-col items-center gap-4 p-4 md:w-2/3 md:p-6">
+		<div class="flex w-full gap-4">
 			<Avatar src={userData.image} width="w-48" rounded="rounded-3xl" />
 			<div class="flex flex-col gap-4">
 				<h1 class="text-xlg">{userData.name}</h1>

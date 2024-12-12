@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import { AppBar, LightSwitch, Avatar } from '@skeletonlabs/skeleton';
 	import { signIn } from '@auth/sveltekit/client';
-	import { getInitials } from '$lib/utils/get_initials';
+	import { getInitials } from '$lib/utils/utils';
 
 	let { children } = $props();
 </script>
