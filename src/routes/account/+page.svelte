@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import Avatar from '$lib/components/core/Avatar.svelte';
 	import { signOut } from '@auth/sveltekit/client';
-	import { Avatar } from '@skeletonlabs/skeleton';
 
 	let userData = $state({ image: '', name: '' });
 
@@ -16,7 +16,7 @@
 <div class="flex w-full justify-center">
 	<div class="card flex w-full max-w-[1410px] flex-col items-center gap-4 p-4 md:w-2/3 md:p-6">
 		<div class="flex w-full gap-4">
-			<Avatar src={userData.image} width="w-48" rounded="rounded-3xl" />
+			<Avatar width="w-48" src={userData.image} name={userData.name} />
 			<div class="flex flex-col gap-4">
 				<h1 class="text-xlg">{userData.name}</h1>
 				<div class="flex gap-3">
@@ -28,13 +28,14 @@
 		</div>
 		<div class="card-footer">
 			<button
-				class="btn-md bg-primary-500"
+				class="btn bg-primary-500"
 				onclick={() => {
 					signOut({ callbackUrl: '/' });
 				}}
 			>
 				Sign Out
 			</button>
+			<a class="btn bg-secondary-500" href="account/edit">Edit</a>
 		</div>
 	</div>
 </div>

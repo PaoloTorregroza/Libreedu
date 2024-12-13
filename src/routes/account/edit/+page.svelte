@@ -1,8 +1,7 @@
 <script lang="ts">
 	import InputText from '$lib/components/core/ui/InputText.svelte';
-	import { getInitials } from '$lib/utils/utils';
-	import { Avatar } from '@skeletonlabs/skeleton';
 	import { Pencil } from 'lucide-svelte';
+	import Avatar from '$lib/components/core/Avatar.svelte';
 
 	const avatarWidth = 'w-48';
 
@@ -23,16 +22,7 @@
 				class="flex w-full flex-col items-center justify-between gap-4 md:flex-row md:items-start"
 			>
 				<div class="relative w-fit">
-					{#if image}
-						<Avatar rounded="rounded-3xl" width={avatarWidth} src={image} />
-					{:else}
-						<Avatar
-							rounded="rounded-3xl"
-							width={avatarWidth}
-							initials={getInitials(name ?? 'NA')}
-							background="dark:bg-secondary-500 bg-warning-600"
-						/>
-					{/if}
+					<Avatar width={avatarWidth} src={image} {name} />
 					<button
 						class="btn absolute -bottom-2 -right-2 cursor-pointer rounded-full bg-tertiary-600 p-2 shadow-lg dark:bg-surface-600"
 					>
