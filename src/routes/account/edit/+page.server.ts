@@ -1,12 +1,14 @@
-import { getLoggedInUser, validateSession } from '$lib/auth/session.server';
+import { getLoggedInUser, validateSession } from '$lib/server/auth/session';
 import { prisma } from '$lib/prisma';
 import type { User } from '@prisma/client';
 import type { Actions, PageServerLoad } from './$types';
 import { error, fail, isActionFailure, redirect } from '@sveltejs/kit';
 import { isValidEmail } from '$lib/utils/utils';
+import { generateEmailVerificationToken } from '$lib/server/auth/emailVerificationToken';
+import { sendVerificationEmail } from '$lib/utils/mailer';
 
 export const actions = {
-	default: async ({ request, locals }) => {
+	default: async ({ request, locals, url }) => {
 		const session = validateSession(await locals.auth());
 		const result = validateFormData(await request.formData());
 
@@ -15,7 +17,7 @@ export const actions = {
 		const [name, email] = [...(result as string[])];
 		const user = await getLoggedInUser(session);
 
-		await updateUser(user, name, email);
+		await updateUser(user, name, email, url.host);
 
 		throw redirect(303, '/account/edit');
 	}
@@ -35,22 +37,37 @@ export const load: PageServerLoad = async ({ locals }) => {
 	return { user };
 };
 
-async function updateUser(user: User, name: string, email: string) {
+async function updateUser(user: User, name: string, email: string, host: string) {
 	if (user.email === email && user.name === name) return;
 
 	const isValid = isValidEmail(email);
-
 	if (!isValid || !name.trim()) error(400, 'Invalid data');
-	if (name.trim() !== '') user.name = name;
-	if (isValid) {
-		user.email = email;
-		user.emailVerified = null;
+
+	if (isValid && user.email != email) {
+		try {
+			handleEmailUpdate(email, host);
+			user.emailVerified = null;
+			user.email = email;
+		} catch (e) {
+			console.error('Error updating user email: ', e);
+			error(500, 'Error updating user email, using old one');
+		}
 	}
 
 	const newUser = await prisma.user.update({
 		where: { id: user.id },
-		data: { name: user.name, email: user.email, emailVerified: user.emailVerified }
+		data: { email: user.email, emailVerified: user.emailVerified, name: user.name }
 	});
+
+	return newUser;
+}
+
+async function handleEmailUpdate(newEmail: string, host: string) {
+	const token = generateEmailVerificationToken(newEmail);
+	const protocol = process.env.NODE_ENV == 'prod' ? 'https' : 'http';
+	const verificationLink = `${protocol}://${host}/api/verify-email?token=${token}`; // TODO: Use proper URL
+
+	sendVerificationEmail(newEmail, verificationLink);
 }
 
 function validateFormData(data: FormData) {
