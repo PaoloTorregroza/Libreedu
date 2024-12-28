@@ -9,7 +9,8 @@
 		hero: {
 			title: 'Lorem ipsum dolor sit amet',
 			subtitle: 'Improve your hard skills one step at a time.',
-			imageURL: 'https://cdn.paolinsky-minis.com/paolinskyCourses/Code%20typing-pana.svg',
+			imageURL:
+				'https://paolinsky-minis-assets.nyc3.cdn.digitaloceanspaces.com/paolinskyCourses/Code%20typing-pana.svg',
 			callToAction: 'Join now and increase your skills. Join now and increase your skills',
 			buttonText: 'Start free!'
 		},
@@ -43,14 +44,16 @@
 		],
 		features: [
 			{
-				imageURL: 'https://cdn.paolinsky-minis.com/paolinskyCourses/Code%20typing-pana.svg',
+				imageURL:
+					'https://paolinsky-minis-assets.nyc3.cdn.digitaloceanspaces.com/paolinskyCourses/Code%20typing-pana.svg',
 				title: 'Lorem ipsum dolor sit amet Feature name!',
 				subtitle: 'Feature subtitle lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
 				bulletPoints: ['fast', 'safe', 'Lorem ipsum dolor'],
 				reversed: false
 			},
 			{
-				imageURL: 'https://cdn.paolinsky-minis.com/paolinskyCourses/Code%20typing-pana.svg',
+				imageURL:
+					'https://paolinsky-minis-assets.nyc3.cdn.digitaloceanspaces.com/paolinskyCourses/Code%20typing-pana.svg',
 				title: 'Lorem ipsum dolor sit amet Feature name!',
 				subtitle: 'Feature subtitle lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
 				bulletPoints: ['Lorem ipsum dolor', 'fast', 'safe'],
