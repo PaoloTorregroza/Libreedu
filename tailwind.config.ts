@@ -1,25 +1,21 @@
 import type { Config } from 'tailwindcss';
-import { join } from 'path';
 import forms from '@tailwindcss/forms';
 
 // 1. Import the Skeleton plugin
-import { skeleton } from '@skeletonlabs/tw-plugin';
+import { skeleton, contentPath } from '@skeletonlabs/skeleton/plugin';
+import * as themes from '@skeletonlabs/skeleton/themes';
 
 const config = {
 	// 2. Opt for dark mode to be handled via the class method
 	darkMode: 'selector',
-	content: [
-		'./src/**/*.{html,js,svelte,ts}',
-		// 3. Append the path to the Skeleton package
-		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
-	],
+	content: ['./src/**/*.{html,js,svelte,ts}', contentPath(import.meta.url, 'svelte')],
 	theme: {
 		extend: {}
 	},
 	plugins: [
 		forms,
 		skeleton({
-			themes: { preset: ['crimson'] }
+			themes: [themes.crimson]
 		})
 	]
 } satisfies Config;

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import InputText from '$lib/components/core/ui/InputText.svelte';
 	import { Pencil } from 'lucide-svelte';
-	import Avatar from '$lib/components/core/Avatar.svelte';
+	import { Avatar } from '@skeletonlabs/skeleton-svelte';
 
-	const avatarWidth = 'w-48';
+	const avatarSize = 'w-48 h-48';
 
 	let { data } = $props();
 
@@ -22,7 +22,7 @@
 				class="flex w-full flex-col items-center justify-between gap-4 md:flex-row md:items-start"
 			>
 				<div class="relative w-fit">
-					<Avatar width={avatarWidth} src={image} {name} />
+					<Avatar size={avatarSize} src={image ?? ''} name={name ?? 'NA'} />
 					<button
 						class="btn absolute -bottom-2 -right-2 cursor-pointer rounded-full bg-tertiary-600 p-2 shadow-lg dark:bg-surface-600"
 					>
