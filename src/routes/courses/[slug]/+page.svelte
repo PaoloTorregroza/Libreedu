@@ -24,7 +24,7 @@
 			<button
 				onclick={() => (sidebarOpen = !sidebarOpen)}
 				type="button"
-				class="variant-ghost-secondary btn btn-sm invisible mb-4 ml-4 md:visible"
+				class="variant-ghost-secondary-500 btn btn-sm invisible mb-4 ml-4 md:visible"
 			>
 				<span>←</span>
 				<span>Hide</span>
@@ -41,7 +41,7 @@
 			<button
 				onclick={() => (sidebarOpen = !sidebarOpen)}
 				type="button"
-				class="variant-ghost-secondary btn btn-sm ml-4"
+				class="variant-ghost-secondary-500 btn btn-sm ml-4"
 			>
 				<span>→</span>
 			</button>

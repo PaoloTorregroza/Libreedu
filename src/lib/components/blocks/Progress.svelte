@@ -40,7 +40,7 @@
 
 <Accordion multiple {value}>
 	{#each sections as section, sectionIndex}
-		<Accordion.Item value={section.id}>
+		<Accordion.Item controlRounded="rounded-xl" controlPadding="py-0 px-5" value={section.id}>
 			{#snippet control()}
 				{section.name}
 			{/snippet}
@@ -62,13 +62,14 @@
 								class="checkbox pointer-events-none"
 								checked={isLessonCompleted(sectionIndex, lessonIndex)}
 							/>
-							<h6 class="mx-1">{lesson.name}</h6>
-							<p class="text-sm font-light opacity-50">{formatTime(lesson.durationSeconds)}</p>
+							<p class="mx-1">{lesson.name}</p>
+							<p class="text-sm opacity-70">{formatTime(lesson.durationSeconds)}</p>
 						</button>
 					{/each}
 				</ul>
 			{/snippet}
 		</Accordion.Item>
+		<hr class="hr" />
 	{/each}
 </Accordion>
 
@@ -82,7 +83,7 @@
 	}
 
 	.currentLessonItem {
-		@apply rounded-md;
+		@apply rounded-md font-bold preset-filled-primary-100-900;
 	}
 
 	.currentLessonItem:hover {

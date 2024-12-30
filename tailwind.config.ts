@@ -15,7 +15,10 @@ const config = {
 	plugins: [
 		forms,
 		skeleton({
-			themes: [themes.crimson]
+			themes: [
+				themes.mona
+				// themes.terminus
+			]
 		})
 	]
 } satisfies Config;

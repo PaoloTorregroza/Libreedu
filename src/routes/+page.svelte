@@ -129,7 +129,7 @@
 			<div
 				class="mt-10 flex flex-col items-center justify-center gap-2 text-start md:flex-row md:justify-normal md:gap-4"
 			>
-				<button class="variant-filled-primary btn-md whitespace-nowrap rounded-lg md:btn-lg"
+				<button class="btn-md whitespace-nowrap rounded-lg preset-filled-primary-500 md:btn-lg"
 					>{landingInfo.hero.buttonText}</button
 				>
 				<h4 class="font-light">{landingInfo.hero.callToAction}</h4>
@@ -148,7 +148,7 @@
 	<section>
 		<div class="flex w-full flex-col justify-center gap-6 md:flex-row md:gap-10 md:p-16">
 			{#each landingInfo.keyPoints.slice(0, 3) as el}
-				<div class="card flex-1 p-5">
+				<div class="visible-card flex-1 p-5">
 					<div class="flex items-center gap-2 text-primary-500">
 						<img class="h-10 w-10 overflow-hidden" src={el.iconURL} alt="Feature Icon" />
 						<h4 class=" font-bold">{el.title}</h4>
@@ -174,11 +174,11 @@
 
 			<div
 				class:hidden={!hiddenSections}
-				class=" pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-surface-50 dark:to-surface-900"
+				class=" pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-white dark:to-surface-950"
 			></div>
 		</div>
 		<button
-			class="variant-filled-secondary btn z-50 rounded-lg"
+			class="btn z-50 rounded-lg preset-filled-secondary-500"
 			class:mt-4={!hiddenSections}
 			onclick={() => (hiddenSections = !hiddenSections)}
 			>{hiddenSections ? 'See all' : 'Hide'}</button
@@ -190,7 +190,7 @@
 	<section class="mt-8 max-w-[1410px] p-10 text-center">
 		<h3>{landingInfo.callToAction.tagline}</h3>
 		<h2 class="text-5xl">{landingInfo.callToAction.title}</h2>
-		<button class="variant-filled-primary btn-lg mt-8 rounded-lg"
+		<button class="btn-lg mt-8 rounded-lg preset-filled-primary-500"
 			>{landingInfo.callToAction.buttonText}</button
 		>
 	</section>

@@ -5,6 +5,7 @@
 	import { signIn } from '@auth/sveltekit/client';
 
 	import { Avatar, AppBar } from '@skeletonlabs/skeleton-svelte';
+	import LightSwitch from '$lib/components/core/LightSwitch.svelte';
 
 	let { children } = $props();
 </script>
@@ -32,17 +33,17 @@
 						/>
 					</a>
 				{:else}
-					<button onclick={() => signIn()} class="variant-glass-primary btn-sm rounded-lg"
+					<button onclick={() => signIn()} class="variant-glass-primary-500btn-sm rounded-lg"
 						>SignIn / SignUp</button
 					>
 				{/if}
-				<!-- <LightSwitch /> -->
+				<LightSwitch />
 			</div>
 		{/snippet}
 	</AppBar>
 
-	<main class="space-y-4 p-4">
+	<main class=" space-y-4 p-4">
 		{@render children()}
 	</main>
-	<footer class="bg-surface-200 p-4 dark:bg-surface-800 dark:text-surface-100">(footer)</footer>
+	<footer class="p-4 preset-filled-surface-200-800 dark:text-surface-100">(footer)</footer>
 </div>
