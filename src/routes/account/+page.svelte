@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { Avatar } from '@skeletonlabs/skeleton-svelte';
+	import { page } from '$app/state';
 	import { signOut } from '@auth/sveltekit/client';
 
-	let userData = $state({ image: '', name: '' });
-
-	page.subscribe((value) => {
-		userData = {
-			image: value.data.session!.user?.image || '',
-			name: value.data.session!.user?.name || ''
+	let userData = $derived.by(() => {
+		const data = page.data.session!.user;
+		return {
+			image: data?.image || '',
+			name: data?.name || ''
 		};
 	});
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { signIn } from '@auth/sveltekit/client';
 
 	import { Avatar, AppBar } from '@skeletonlabs/skeleton-svelte';
@@ -22,11 +22,11 @@
 		{/snippet}
 		{#snippet trail()}
 			<div class="flex items-center gap-4">
-				{#if $page.data.session}
+				{#if page.data.session}
 					<a href="/account">
 						<Avatar
-							src={$page.data.session.user!.image ?? ''}
-							name={$page.data.session.user!.name ?? 'NA'}
+							src={page.data.session.user!.image ?? ''}
+							name={page.data.session.user!.name ?? 'NA'}
 							background="dark:bg-secondary-500 bg-warning-600"
 							size="h-9 w-9"
 							border="border-2 border-surface-300-600-token hover:!border-primary-500"
