@@ -45,10 +45,10 @@
 <div class="flex flex-col gap-4">
 	<div class="flex justify-between">
 		<div>
-			<button class="variant-soft-primary btn btn-sm" type="button">
+			<button class="variant-soft-primary-500 btn btn-sm" type="button">
 				{'←'}
 			</button>
-			<button class="variant-soft-primary btn btn-sm" type="button">
+			<button class="variant-soft-primary-500 btn btn-sm" type="button">
 				{'→'}
 			</button>
 		</div>
@@ -80,7 +80,7 @@
 	{/if}
 
 	<button
-		class="variant-soft-primary btn max-w-lg"
+		class="preset-soft-primary-500 btn max-w-lg"
 		onclick={async () => await completeLesson(lesson.id)}>Next lesson</button
 	>
 </div>

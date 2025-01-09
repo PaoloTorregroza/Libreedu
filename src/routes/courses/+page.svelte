@@ -12,7 +12,7 @@
 				{#each category.courses as course}
 					<a
 						href={'/courses/' + course.slug}
-						class="card variant-soft-surface card-hover basis-5/6 overflow-hidden md:basis-1/5"
+						class="card card-hover basis-5/6 overflow-hidden preset-filled-surface-500 md:basis-1/5"
 					>
 						<div class="aspect-[6/3] w-full overflow-hidden">
 							<img

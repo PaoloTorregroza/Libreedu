@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import type { FeatureContent } from '../../../routes/+page.svelte';
+	import type { FeatureContent } from '$lib/types/landing.types';
 
 	export type FeatureSectionProps = {
 		content: FeatureContent;
