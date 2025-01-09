@@ -6,7 +6,7 @@
 </script>
 
 <!-- <div class="card w-full max-w-[410px] p-4 md:max-w-[360px]"> -->
-<div class="card mb-8 max-w-[410px] break-inside-avoid p-4 text-start">
+<div class="visible-card mb-8 max-w-[410px] break-inside-avoid p-4 text-start">
 	<div class="flex items-start gap-3">
 		<Avatar src={story.pictureURL} name="NA" />
 		<div>

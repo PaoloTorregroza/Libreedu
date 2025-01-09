@@ -2,6 +2,7 @@
 	import InputText from '$lib/components/core/ui/InputText.svelte';
 	import { Pencil } from 'lucide-svelte';
 	import { Avatar } from '@skeletonlabs/skeleton-svelte';
+	import { enhance } from '$app/forms';
 
 	const avatarSize = 'w-48 h-48';
 
@@ -72,7 +73,7 @@
 				{/if}
 			</div>
 
-			<form method="POST" class=" flex flex-1 flex-col gap-4">
+			<form method="POST" use:enhance class=" flex flex-1 flex-col gap-4">
 				<InputText
 					width="md:flex-1 w-full md:w-auto"
 					type="text"

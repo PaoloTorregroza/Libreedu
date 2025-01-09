@@ -2,24 +2,42 @@
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import IconMoon from 'lucide-svelte/icons/moon';
 	import IconSun from 'lucide-svelte/icons/sun';
+	import {
+		getCurrentUIMode,
+		loadUIModeFromLocalStorage,
+		setCurrentUIMode,
+		type UIMode
+	} from '$lib/utils/uiMode.svelte';
+	import { onMount } from 'svelte';
 
-	let mode = $state(false);
+	let mode: UIMode = $state('dark');
 
-	function handleModeChange() {
-		if (mode) {
-			document.querySelector('html')?.classList.add('dark');
+	onMount(() => {
+		setCurrentUIMode(loadUIModeFromLocalStorage());
+		mode = getCurrentUIMode();
+		console.log(mode);
+	});
+
+	function handleModeChange(details: { checked: boolean }) {
+		if (details.checked) {
+			mode = 'dark';
+			setCurrentUIMode(mode);
 		} else {
-			document.querySelector('html')?.classList.remove('dark');
+			mode = 'light';
+			setCurrentUIMode(mode);
 		}
 	}
 </script>
 
 <Switch
 	name="mode"
-	controlActive="bg-surface-200"
-	bind:checked={mode}
+	controlInactive="bg-surface-200"
+	controlActive="bg-surface-800"
+	iconActiveBase="bg-surface-950 text-surface-50"
+	iconInactiveBase="bg-surface-50"
+	checked={mode === 'dark'}
 	onCheckedChange={handleModeChange}
 >
-	{#snippet inactiveChild()}<IconMoon size="14" />{/snippet}
-	{#snippet activeChild()}<IconSun size="14" />{/snippet}
+	{#snippet inactiveChild()}<IconSun size="14" />{/snippet}
+	{#snippet activeChild()}<IconMoon size="14" />{/snippet}
 </Switch>

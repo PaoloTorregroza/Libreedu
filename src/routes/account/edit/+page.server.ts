@@ -18,7 +18,6 @@ export const actions = {
 		const user = await getLoggedInUser(session);
 
 		await updateUser(user, name, email, url.host);
-
 		throw redirect(303, '/account/edit');
 	}
 } satisfies Actions;
@@ -56,7 +55,7 @@ async function updateUser(user: User, name: string, email: string, host: string)
 
 	const newUser = await prisma.user.update({
 		where: { id: user.id },
-		data: { email: user.email, emailVerified: user.emailVerified, name: user.name }
+		data: { email: user.email, emailVerified: user.emailVerified, name }
 	});
 
 	return newUser;

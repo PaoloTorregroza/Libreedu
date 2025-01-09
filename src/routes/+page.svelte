@@ -163,7 +163,7 @@
 	{/each}
 
 	<!-- STORIES -->
-	<section class="items-center text-center">
+	<section class=" items-center text-center">
 		<h2 class="m-4 mb-10">What people says about Libreedu</h2>
 		<div class:stories-hidden={hiddenSections} class="relative">
 			<div class="columns-1 gap-5 sm:columns-2 sm:gap-7 md:columns-3">
