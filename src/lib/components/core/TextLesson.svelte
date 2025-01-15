@@ -4,6 +4,7 @@
 	import { Render } from 'svelte-purify/browser-only';
 	import hljs from 'highlight.js';
 	import { browser } from '$app/environment';
+	import { uiModeHandler } from '$lib/utils/uiMode.svelte';
 
 	let { content }: { content: string } = $props();
 
@@ -17,22 +18,13 @@
 			}
 		})
 	);
-
-	// let darkMode = $state(!modeCurrent);
-
-	// onMount(() => {
-	// 	modeCurrent.subscribe((mode) => {
-	// 		darkMode = mode;
-	// 	});
-	// });
 </script>
 
 <div class="flex flex-col gap-3 p-8 pr-16">
 	<link
 		rel="stylesheet"
-		href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/stackoverflow-light.min.css`}
+		href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${uiModeHandler.uiMode === 'dark' ? 'dark' : 'stackoverflow-light'}.min.css`}
 	/>
-	<!-- href={`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${!darkMode ? 'dark' : 'stackoverflow-light'}.min.css`} -->
 	{#if browser}
 		{#await highlightMarked.parse(content) then content}
 			<Render html={content} />

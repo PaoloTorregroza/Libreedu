@@ -2,29 +2,19 @@
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import IconMoon from 'lucide-svelte/icons/moon';
 	import IconSun from 'lucide-svelte/icons/sun';
-	import {
-		getCurrentUIMode,
-		loadUIModeFromLocalStorage,
-		setCurrentUIMode,
-		type UIMode
-	} from '$lib/utils/uiMode.svelte';
+	import { uiModeHandler } from '$lib/utils/uiMode.svelte';
 	import { onMount } from 'svelte';
 
-	let mode: UIMode = $state('dark');
-
 	onMount(() => {
-		setCurrentUIMode(loadUIModeFromLocalStorage());
-		mode = getCurrentUIMode();
-		console.log(mode);
+		uiModeHandler.loadUIModeFromLocalStorage();
+		console.log(uiModeHandler.uiMode);
 	});
 
 	function handleModeChange(details: { checked: boolean }) {
 		if (details.checked) {
-			mode = 'dark';
-			setCurrentUIMode(mode);
+			uiModeHandler.uiMode = 'dark';
 		} else {
-			mode = 'light';
-			setCurrentUIMode(mode);
+			uiModeHandler.uiMode = 'light';
 		}
 	}
 </script>
@@ -35,7 +25,7 @@
 	controlActive="bg-surface-800"
 	iconActiveBase="bg-surface-950 text-surface-50"
 	iconInactiveBase="bg-surface-50"
-	checked={mode === 'dark'}
+	checked={uiModeHandler.uiMode === 'dark'}
 	onCheckedChange={handleModeChange}
 >
 	{#snippet inactiveChild()}<IconSun size="14" />{/snippet}

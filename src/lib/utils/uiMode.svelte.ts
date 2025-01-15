@@ -4,33 +4,45 @@ const UI_MODE_KEY = 'ui-mode';
 
 export type UIMode = 'light' | 'dark';
 
-export function getCurrentUIMode(): UIMode {
-	if (browser) {
-		return document.querySelector('html')!.classList.contains('dark') ? 'dark' : 'light';
+class UIModeHandler {
+	#uiMode: UIMode = $state('dark');
+
+	get uiMode() {
+		return this.#uiMode;
 	}
 
-	return 'dark';
-}
+	set uiMode(mode: UIMode) {
+		this.#uiMode = mode;
+		this.setCurrentUIMode(mode);
+	}
 
-export function loadUIModeFromLocalStorage(): UIMode {
-	return localStorage.getItem(UI_MODE_KEY) as UIMode;
-}
-
-export function setCurrentUIMode(mode: UIMode) {
-	if (browser) {
-		if (mode === 'dark') {
-			document.querySelector('html')!.classList.remove('light');
-		} else {
-			document.querySelector('html')!.classList.remove('dark');
+	loadUIModeFromLocalStorage(): UIMode {
+		if (browser) {
+			const mode = localStorage.getItem(UI_MODE_KEY) as UIMode;
+			return mode;
 		}
 
-		saveUIModeToLocalStorage(mode);
-		return document.querySelector('html')!.classList.add(mode);
+		return 'dark';
+	}
+
+	setCurrentUIMode(mode: UIMode) {
+		if (browser) {
+			if (mode === 'dark') {
+				document.querySelector('html')!.classList.remove('light');
+			} else {
+				document.querySelector('html')!.classList.remove('dark');
+			}
+
+			this.saveUIModeToLocalStorage(mode);
+			return document.querySelector('html')!.classList.add(mode);
+		}
+	}
+
+	saveUIModeToLocalStorage(mode: UIMode) {
+		if (browser) {
+			localStorage.setItem(UI_MODE_KEY, mode);
+		}
 	}
 }
 
-function saveUIModeToLocalStorage(mode: UIMode) {
-	if (browser) {
-		localStorage.setItem(UI_MODE_KEY, mode);
-	}
-}
+export const uiModeHandler = new UIModeHandler();
