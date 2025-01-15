@@ -1,4 +1,6 @@
 <script lang="ts">
+	import CourseCard from '$lib/components/core/CourseCard.svelte';
+
 	let { data } = $props();
 </script>
 
@@ -10,22 +12,7 @@
 			<h5 class="font-light">{category.description}</h5>
 			<div class="mt-7 flex w-full flex-wrap items-start justify-center gap-4">
 				{#each category.courses as course}
-					<a
-						href={'/courses/' + course.slug}
-						class="card card-hover basis-5/6 overflow-hidden preset-filled-surface-500 md:basis-1/5"
-					>
-						<div class="aspect-[6/3] w-full overflow-hidden">
-							<img
-								class="h-full w-full object-cover"
-								src={course.thumbnail}
-								alt="Course thumbnail"
-							/>
-						</div>
-						<div class="p-4">
-							<h3 class="font-bold">{course.name}</h3>
-							<p class="font-light">{course.description}</p>
-						</div>
-					</a>
+					<CourseCard {course} />
 				{/each}
 			</div>
 		</div>

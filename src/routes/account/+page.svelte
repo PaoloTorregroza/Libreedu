@@ -2,6 +2,7 @@
 	import { Avatar } from '@skeletonlabs/skeleton-svelte';
 	import { page } from '$app/state';
 	import { signOut } from '@auth/sveltekit/client';
+	import CourseDashboard from '$lib/components/blocks/account/CourseDashboard.svelte';
 
 	let userData = $derived.by(() => {
 		const data = page.data.session!.user;
@@ -12,7 +13,7 @@
 	});
 </script>
 
-<div class="roun flex w-full justify-center">
+<div class="flex w-full flex-col items-center justify-center rounded">
 	<div
 		class="visible-card flex w-full max-w-[1410px] flex-col items-center gap-4 p-4 md:w-2/3 md:p-6"
 	>
@@ -34,6 +35,7 @@
 			</div>
 		</div>
 		<div class="card-footer">
+			<a class="btn bg-secondary-500" href="account/edit">Edit</a>
 			<button
 				class="btn bg-primary-500"
 				onclick={() => {
@@ -42,7 +44,7 @@
 			>
 				Sign Out
 			</button>
-			<a class="btn bg-secondary-500" href="account/edit">Edit</a>
 		</div>
 	</div>
+	<CourseDashboard />
 </div>

@@ -1,9 +1,10 @@
 import { prisma } from '$lib/prisma';
+import type { CourseGroupWithCourses } from '$lib/types/db.types';
 
 export async function load() {
-	const courseGroups = await prisma.courseGroup.findMany({
+	const courseGroups: CourseGroupWithCourses[] = await prisma.courseGroup.findMany({
 		include: {
-			courses: { select: { name: true, description: true, slug: true, thumbnail: true } }
+			courses: true
 		}
 	});
 	return { courseGroups };
