@@ -12,22 +12,19 @@
 
 	function handleModeChange(details: { checked: boolean }) {
 		if (details.checked) {
-			uiModeHandler.uiMode = 'dark';
-		} else {
 			uiModeHandler.uiMode = 'light';
+		} else {
+			uiModeHandler.uiMode = 'dark';
 		}
 	}
 </script>
 
 <Switch
 	name="mode"
-	controlInactive="bg-surface-200"
-	controlActive="bg-surface-800"
-	iconActiveBase="bg-surface-950 text-surface-50"
-	iconInactiveBase="bg-surface-50"
-	checked={uiModeHandler.uiMode === 'dark'}
+	controlActive="bg-surface-200"
 	onCheckedChange={handleModeChange}
+	checked={uiModeHandler.uiMode === 'light'}
 >
-	{#snippet inactiveChild()}<IconSun size="14" />{/snippet}
-	{#snippet activeChild()}<IconMoon size="14" />{/snippet}
+	{#snippet activeChild()}<IconSun size="14" />{/snippet}
+	{#snippet inactiveChild()}<IconMoon size="14" />{/snippet}
 </Switch>
